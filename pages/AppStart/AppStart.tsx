@@ -8,7 +8,7 @@ export default function AppStart() {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     
     useEffect(() => {
-        const timer = setInterval(() => navigation.navigate('BottomNavigator'), 3000);
+        const timer = setInterval(() => navigation.reset({index: 0, routes: [{name:'BottomNavigator'}]}), 3000);
         return () => clearInterval(timer);
     }, [navigation]);
 
