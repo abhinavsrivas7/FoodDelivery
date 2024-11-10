@@ -14,7 +14,9 @@ export default function Dining() {
 
     return (
         <GestureHandlerRootView>
-            <PanGestureHandler onGestureEvent={onSwipe}>
+            <PanGestureHandler 
+                onGestureEvent={onSwipe} 
+                activeOffsetX={[0, 70]}>
                 <View style={{paddingTop: 40, backgroundColor: 'black', height: '100%'}}>
                     <Text style={{color: 'white'}}>Reached Dining</Text>
                 </View>

@@ -17,7 +17,9 @@ export default function Delivery() {
 
     return (
         <GestureHandlerRootView>
-            <PanGestureHandler onGestureEvent={onSwipe}>
+            <PanGestureHandler 
+                onGestureEvent={onSwipe} 
+                activeOffsetX={[-70, 0]}>
                 <View style={homeStyles.middleView}>
                     <Text style={homeStyles.middleViewText}>nininj</Text>
                 </View>

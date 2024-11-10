@@ -10,7 +10,7 @@ export const bottomNavigatorStyles = (theme: 'light' | 'dark' | null | undefined
     },
     topView: {
         height: '45%',
-        paddingTop: 20,
+        paddingTop: 10,
         backgroundColor: '#d75158',
         borderBottomLeftRadius: 15,
         borderBottomRightRadius: 15,
