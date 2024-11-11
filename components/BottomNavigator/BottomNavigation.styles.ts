@@ -6,27 +6,34 @@ export const bottomNavigatorStyles = (theme: 'light' | 'dark' | null | undefined
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        backgroundColor: theme === 'dark' ? "#1f1f1f" : "#f8f4f4"
+        backgroundColor: theme === 'dark' ? "#000000" : "#f8f4f4"
     },
     topView: {
         height: '45%',
-        paddingTop: 10,
+        paddingTop: 15,
         backgroundColor: '#d75158',
         borderBottomLeftRadius: 15,
         borderBottomRightRadius: 15,
     },
     firstRowTopView: {
-        paddingTop: 30,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '2%',
+        paddingTop: 30
     },
     firstRowTopViewAddress: {
-        width: '60%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        paddingLeft: 5
+    },
+    firstRowTopViewLocation: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     addressName: {
         fontWeight: '900',
@@ -37,5 +44,21 @@ export const bottomNavigatorStyles = (theme: 'light' | 'dark' | null | undefined
         fontWeight: '400',
         fontSize: 13,
         color: '#eeffff'
+    },
+    downIcon: {
+        color: 'white',
+        fontSize: 19
+    },
+    addressSelector: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        gap: 5
+    },
+    firstRowTopViewRightSection: {
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 10
     }
 })

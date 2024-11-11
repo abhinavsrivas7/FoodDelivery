@@ -15,9 +15,11 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
-      }
+      },
+      "supportsTablet": true
     },
     "web": {
+      "supportsTablet": true
     }
   }
 }

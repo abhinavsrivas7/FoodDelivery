@@ -4,10 +4,12 @@ import Delivery from "../../pages/Delivery/Delivery";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Dining from "../../pages/Dining/Dining";
-import { Text, useColorScheme, View } from "react-native";
+import { Pressable, Text, useColorScheme, View, Dimensions } from "react-native";
 import { bottomNavigatorStyles } from "./BottomNavigation.styles";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../RootStackParamList";
+import React, { useState } from "react";
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function BottomNavigator() {
     const colorScheme = useColorScheme();
@@ -17,33 +19,55 @@ export default function BottomNavigator() {
     const backGroundColor = colorScheme === 'light' ? '#ffffff' : '#181818';
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-    const getTabBarLabel = (text: string, color: string) => 
-        <Text style={{color: color}}>{text}</Text>;
+    const addresses = [
+        { label: 'Home', value: 'C-71, Manas City, Sugamau Road...' },
+        { label: 'Work', value: 'C-71, Chandan Road...' },
+        { label: 'Other', value: 'C-71, Amrai Gao...' }
+    ];
+
+    const [selectedAddress, setSelectedAddress] = useState(addresses[0]);
+    const screenWidth = Dimensions.get("window").width;
 
     return (<>
         <View style={bottomNavigatorStyles(colorScheme).pageView}>
             <View style={bottomNavigatorStyles(colorScheme).topView}>
                 <View style={bottomNavigatorStyles(colorScheme).firstRowTopView}>
-                    <MaterialIcons name="location-on" size={30} color="white" />
-                    <View style={bottomNavigatorStyles(colorScheme).firstRowTopViewAddress}>
-                        <Text style={bottomNavigatorStyles(colorScheme).addressName}>
-                            Home
-                        </Text>
-                        <Text style={bottomNavigatorStyles(colorScheme).fullAddress}>
-                            C-71, Manas City, Sugamau Road...
-                        </Text>
+                    <Pressable style={bottomNavigatorStyles(colorScheme).firstRowTopViewLocation} 
+                    onPress={() => navigation.reset(
+                        {
+                            index: 1, 
+                            routes: [{name: 'BottomNavigator'}, {name: 'AddressModal'}]
+                        }
+                    )}>
+                        <MaterialIcons name="location-on" size={30} color="white" />
+                        <View style={bottomNavigatorStyles(colorScheme).firstRowTopViewAddress}>
+                            <View style={bottomNavigatorStyles(colorScheme).addressSelector}>
+                                <Text style={bottomNavigatorStyles(colorScheme).addressName}>
+                                   {selectedAddress.label}
+                                </Text>
+                                <AntDesign 
+                                    style={bottomNavigatorStyles(colorScheme).downIcon}
+                                    name="down" 
+                                />
+                            </View>
+                            <Text style={bottomNavigatorStyles(colorScheme).fullAddress}>
+                                {selectedAddress.value}
+                            </Text>
+                        </View>
+                    </Pressable>
+                    <View style={bottomNavigatorStyles(colorScheme).firstRowTopViewRightSection}>
+                        <MaterialIcons name="g-translate" size={25} color="white" />
+                        <MaterialCommunityIcons 
+                            onPress={() => navigation.reset(
+                                {
+                                    index: 1, 
+                                    routes: [{name: 'BottomNavigator'}, {name: 'Account'}]
+                                }
+                            )}
+                            name="format-letter-matches" 
+                            size={25}
+                            color="white" /> 
                     </View>
-                    <MaterialIcons name="g-translate" size={25} color="white" />
-                    <MaterialCommunityIcons 
-                        onPress={() => navigation.reset(
-                            {
-                                index: 1, 
-                                routes: [{name: 'BottomNavigator'}, {name: 'Account'}]
-                            }
-                        )}
-                        name="format-letter-matches" 
-                        size={25}
-                        color="white" /> 
                 </View>
             </View>
             <Tab.Navigator screenOptions={{
@@ -54,16 +78,22 @@ export default function BottomNavigator() {
         }}>
             <Tab.Screen name="Delivery" component={Delivery} 
                 options={{
-                    tabBarLabel: ({color}) => getTabBarLabel("Delivery", color),
-                    tabBarIcon: ({color, size}) => 
-                        <MaterialCommunityIcons name="scooter" size={size} color={color} />
+                    tabBarLabel: "",
+                    tabBarIcon: ({color, size}) => <View style={{width:'100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: screenWidth < 600 ? '5.5%' : '2%'}}>
+                            <MaterialCommunityIcons name="scooter" size={size} color={color} />
+                            <Text style={{color: color, textAlign: 'center', fontSize: 12, width: 100}}>Delivery</Text>
+                        </View>,
+                    tabBarStyle: {height: 50, backgroundColor: colorScheme == 'light' ? 'white' : '#222222'}
                 }}  
             />
             <Tab.Screen name="Dining" component={Dining} 
                 options={{
-                    tabBarLabel: ({color}) => getTabBarLabel("Dining", color),
-                    tabBarIcon: ({color, size}) => 
-                        <MaterialIcons name="dining" size={size} color={color} />
+                    tabBarLabel: "",
+                    tabBarIcon: ({color, size}) => <View style={{width:'100%', display: 'flex', flexDirection: 'column', alignItems: 'center',  marginTop: screenWidth < 600 ? '5.5%' : '2%'}}>
+                            <MaterialIcons name="dining" size={size} color={color} />
+                            <Text style={{color: color, textAlign: 'center', fontSize: 12, width: 100}}>Dining</Text>
+                    </View>,
+                    tabBarStyle: {height: 50, backgroundColor: colorScheme == 'light' ? 'white' : '#222222'}
                 }}  
             />
         </Tab.Navigator>
